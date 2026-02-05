@@ -2,7 +2,6 @@ package com.netbank.inb.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -34,4 +33,3 @@ public abstract class Account {
     // Common fields for all account types
     private Boolean active = true;
 }
-

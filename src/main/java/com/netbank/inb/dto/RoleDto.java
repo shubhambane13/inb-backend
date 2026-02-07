@@ -1,24 +1,16 @@
-package com.netbank.inb.entity;
+package com.netbank.inb.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
-@Entity
-@Table(name = "roles")
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class Role {
-
-    @Id
+public class RoleDto {
     private String roleId;
 
     private String roleName;
-
 }

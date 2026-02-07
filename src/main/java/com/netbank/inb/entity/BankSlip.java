@@ -1,13 +1,20 @@
 package com.netbank.inb.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bank_slips")
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class BankSlip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

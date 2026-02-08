@@ -58,6 +58,12 @@ public class AuthController {
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
 
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!isAdmin) {
+            throw new BadApiRequestException("Customer cannot login from Admin Portal");
+        }
         String token = jwtHelper.generateToken(userDetails);
 
         UserDto userDto = modelMapper.map(userDetails, UserDto.class);
@@ -70,6 +76,13 @@ public class AuthController {
         this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+
+        boolean isCustomer = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_NORMAL"));
+
+        if (!isCustomer) {
+            throw new BadApiRequestException("Admins cannot login from Customer Portal");
+        }
 
         String token = jwtHelper.generateToken(userDetails);
 

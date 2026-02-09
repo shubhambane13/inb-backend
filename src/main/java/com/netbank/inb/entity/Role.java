@@ -1,5 +1,6 @@
 package com.netbank.inb.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,7 +18,8 @@ import lombok.*;
 public class Role {
 
     @Id
-    private String roleId;
+    @Column(name = "role_id")
+    private String id;
 
     private String roleName;
 

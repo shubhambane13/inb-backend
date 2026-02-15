@@ -1,6 +1,7 @@
 package com.netbank.inb.service;
 
 import com.netbank.inb.dto.ApiResponseMessage;
+import com.netbank.inb.dto.DashboardStatsDto;
 import com.netbank.inb.dto.PageableResponse;
 import com.netbank.inb.dto.UserDto;
 
@@ -24,4 +25,6 @@ public interface UserService {
     ApiResponseMessage lockCustomer(Long customerId);
 
     ApiResponseMessage unLockCustomer(Long customerId);
+
+    DashboardStatsDto getDashboardStats();
 }

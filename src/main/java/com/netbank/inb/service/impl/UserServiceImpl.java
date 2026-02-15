@@ -1,6 +1,7 @@
 package com.netbank.inb.service.impl;
 
 import com.netbank.inb.dto.ApiResponseMessage;
+import com.netbank.inb.dto.DashboardStatsDto;
 import com.netbank.inb.dto.PageableResponse;
 import com.netbank.inb.dto.UserDto;
 import com.netbank.inb.entity.Role;
@@ -143,5 +144,10 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
         ApiResponseMessage build = ApiResponseMessage.builder().message("Customer Unlocked Successfully.").status(HttpStatus.OK).success(true).build();
         return build;
+    }
+
+    @Override
+    public DashboardStatsDto getDashboardStats() {
+        return userRepository.getDashboardStats(normalRoleId);
     }
 }

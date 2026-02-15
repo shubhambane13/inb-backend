@@ -53,4 +53,9 @@ public class UserController {
     public ResponseEntity<ApiResponseMessage> unlockCustomer(@RequestBody UserDto user) {
         return new ResponseEntity<>(this.userService.unLockCustomer(user.getId()), HttpStatus.OK);
     }
+
+    @PostMapping("/dashboard-stats")
+    public ResponseEntity<?> getDashboardStats() {
+        return new ResponseEntity<>(this.userService.getDashboardStats(), HttpStatus.OK);
+    }
 }

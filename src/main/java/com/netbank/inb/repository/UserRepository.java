@@ -9,9 +9,11 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String mail);
     // getActiveCustomers
-    Page<User> findByAccountApprovedTrueAndRolesId(String roleId, Pageable pageable);
+    Page<User> findByAccountApprovedTrueAndAccountLockedFalseAndRolesId(String roleId, Pageable pageable);
     // getPendingCustomers
     Page<User> findByAccountApprovedFalseAndRolesId(String roleId, Pageable pageable);
     // getLockedCustomers
     Page<User> findByAccountLockedTrueAndRolesId(String roleId, Pageable pageable);
+    // User by Role Id
+    Optional<User> findByIdAndRolesId(Long id, String roleId);
 }

@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     public PageableResponse<UserDto> getActiveCustomerUsers(int pageNumber, int pageSize, String sortBy, String sortDir) {
         Sort sort = (sortDir.equalsIgnoreCase("asc")) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-        Page<User> page = userRepository.findByAccountApprovedTrueAndRolesId(normalRoleId, pageable);
+        Page<User> page = userRepository.findByAccountApprovedTrueAndAccountLockedFalseAndRolesId(normalRoleId, pageable);
         PageableResponse<UserDto> response = Util.getPageableResponse(page, UserDto.class);
         return response;
     }
@@ -96,5 +96,52 @@ public class UserServiceImpl implements UserService {
         Page<User> page = userRepository.findByAccountLockedTrueAndRolesId(normalRoleId, pageable);
         PageableResponse<UserDto> response = Util.getPageableResponse(page, UserDto.class);
         return response;
+    }
+
+    @Override
+    public ApiResponseMessage approveCustomer(Long customerId) {
+        User user = this.userRepository.findByIdAndRolesId(customerId, normalRoleId).orElseThrow(() -> new RuntimeException("User Not Found with given id"));
+        if(user.getAccountApproved()) {
+            ApiResponseMessage build = ApiResponseMessage.builder().message("Customer is already approved.").status(HttpStatus.BAD_REQUEST).success(false).build();
+            return build;
+        }
+        user.setAccountApproved(true);
+        this.userRepository.save(user);
+         ApiResponseMessage build = ApiResponseMessage.builder().message("Customer Approved Successfully.").status(HttpStatus.OK).success(true).build();
+         return build;
+    }
+
+    @Override
+    public ApiResponseMessage rejectCustomer(Long customerId) {
+        User user = this.userRepository.findByIdAndRolesId(customerId, normalRoleId).orElseThrow(() -> new RuntimeException("User Not Found with given id"));
+        userRepository.delete(user);
+        ApiResponseMessage build = ApiResponseMessage.builder().message("Customer Rejected Successfully.").status(HttpStatus.OK).success(true).build();
+        return build;
+    }
+
+    @Override
+    public ApiResponseMessage lockCustomer(Long customerId) {
+        User user = this.userRepository.findByIdAndRolesId(customerId, normalRoleId).orElseThrow(() -> new RuntimeException("User Not Found with given id"));
+        if(user.getAccountLocked()) {
+            ApiResponseMessage build = ApiResponseMessage.builder().message("Customer is already locked.").status(HttpStatus.BAD_REQUEST).success(false).build();
+            return build;
+        }
+        user.setAccountLocked(true);
+        this.userRepository.save(user);
+        ApiResponseMessage build = ApiResponseMessage.builder().message("Customer Locked Successfully.").status(HttpStatus.OK).success(true).build();
+        return build;
+    }
+
+    @Override
+    public ApiResponseMessage unLockCustomer(Long customerId) {
+        User user = this.userRepository.findByIdAndRolesId(customerId, normalRoleId).orElseThrow(() -> new RuntimeException("User Not Found with given id"));
+        if(!user.getAccountLocked()) {
+            ApiResponseMessage build = ApiResponseMessage.builder().message("Customer is already unlocked.").status(HttpStatus.BAD_REQUEST).success(false).build();
+            return build;
+        }
+        user.setAccountLocked(false);
+        this.userRepository.save(user);
+        ApiResponseMessage build = ApiResponseMessage.builder().message("Customer Unlocked Successfully.").status(HttpStatus.OK).success(true).build();
+        return build;
     }
 }

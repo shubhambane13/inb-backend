@@ -10,9 +10,18 @@ public interface UserService {
 
     ApiResponseMessage createAdminUser(UserDto userDto);
 
+    // Customer Management
     PageableResponse<UserDto> getActiveCustomerUsers(int pageNumber, int pageSize, String sortBy, String sortDir);
 
     PageableResponse<UserDto> getPendingCustomerUsers(int pageNumber, int pageSize, String sortBy, String sortDir);
 
     PageableResponse<UserDto> getLockedCustomerUsers(int pageNumber, int pageSize, String sortBy, String sortDir);
+
+    ApiResponseMessage approveCustomer(Long customerId);
+
+    ApiResponseMessage rejectCustomer(Long customerId);
+
+    ApiResponseMessage lockCustomer(Long customerId);
+
+    ApiResponseMessage unLockCustomer(Long customerId);
 }

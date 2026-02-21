@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 public class TransactionDto {
     private Long id;
 
-    private Account fromAccount;
+    private AccountDto fromAccount;
 
-    private Account toAccount;
+    private AccountDto toAccount;
 
     @Column(nullable = false)
     private BigDecimal amount;

@@ -20,9 +20,9 @@ public class BankSlipDto {
 
     private String slipNumber;
 
-    private User customer;
+    private UserDto customer;
 
-    private Account account;
+    private AccountDto account;
 
     private BigDecimal chequeAmount;
 

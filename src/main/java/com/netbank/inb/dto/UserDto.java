@@ -1,12 +1,8 @@
 package com.netbank.inb.dto;
 
-import com.netbank.inb.entity.Account;
-import com.netbank.inb.entity.Role;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +43,7 @@ public class UserDto {
 
     private Boolean accountLocked = false;
 
-    private List<Account> accounts;
+    private List<AccountDto> accounts;
 
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleDto> roles = new HashSet<>();
 }

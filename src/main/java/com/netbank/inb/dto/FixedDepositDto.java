@@ -23,7 +23,5 @@ public class FixedDepositDto {
 
     private LocalDateTime maturityDate;
 
-//    private User customer;
-
-    private Account linkedAccount;
+    private AccountDto linkedAccount;
 }

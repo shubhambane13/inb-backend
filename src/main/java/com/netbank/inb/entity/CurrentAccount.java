@@ -1,5 +1,6 @@
 package com.netbank.inb.entity;
 
+import com.netbank.inb.constant.AccountConstant;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -7,7 +8,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
-@DiscriminatorValue("CURRENT")
+@DiscriminatorValue(AccountConstant.CURRENT_ACCOUNT)
 @Data
 @Getter
 @Setter

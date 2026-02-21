@@ -17,7 +17,7 @@ public class SavingsAccountDto {
 
     private String accountNumber;
 
-    private User customer;
+//    private User customer;
 
     private BigDecimal balance = BigDecimal.ZERO;
 

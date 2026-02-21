@@ -41,6 +41,8 @@ public class UserDto {
 
     private Boolean accountApproved = false;
 
+    private String requestedAccountType;
+
     private Integer failedLoginAttempts = 0;
 
     private Boolean accountLocked = false;

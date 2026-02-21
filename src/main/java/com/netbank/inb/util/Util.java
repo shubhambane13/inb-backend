@@ -20,4 +20,9 @@ public class Util {
         response.setLastPage(page.isLast());
         return response;
     }
+
+    public static String generateAccountNumber() {
+        // Simple logic to generate 10 digit number
+        return String.valueOf((long) (Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L));
+    }
 }

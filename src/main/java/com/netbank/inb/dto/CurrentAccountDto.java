@@ -18,7 +18,7 @@ public class CurrentAccountDto {
 
     private String accountNumber;
 
-    private User customer;
+//    private User customer;
 
     private BigDecimal balance = BigDecimal.ZERO;
 

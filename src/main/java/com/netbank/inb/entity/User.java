@@ -15,13 +15,12 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
+@ToString(exclude = {"accounts", "fixedDeposits", "roles"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +47,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean accountApproved = false;  // Registration approval status
 
+    @Column(nullable = false)
+    private String requestedAccountType; // Initial account type requested by the user
+
     @Column
     private Integer failedLoginAttempts = 0;
 
@@ -56,6 +58,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Account> accounts;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<FixedDeposit> fixedDeposits;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<>();

@@ -1,5 +1,6 @@
 package com.netbank.inb.entity;
 
+import com.netbank.inb.constant.AccountConstant;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -7,7 +8,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
-@DiscriminatorValue("SAVINGS")
+@DiscriminatorValue(AccountConstant.SAVING_ACCOUNT)
 @Data
 @Getter
 @Setter
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 public class SavingsAccount extends Account {
-    private BigDecimal interestRate;           // Configurable, same for all savings
-    private BigDecimal dailyWithdrawalLimit;   // Configurable
-    private BigDecimal minimumBalance;         // Configurable
+    private BigDecimal interestRate;
+    private BigDecimal dailyWithdrawalLimit;
+    private BigDecimal minimumBalance;
 }

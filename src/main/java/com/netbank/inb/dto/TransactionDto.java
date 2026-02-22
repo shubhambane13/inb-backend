@@ -21,17 +21,13 @@ public class TransactionDto {
 
     private AccountDto toAccount;
 
-    @Column(nullable = false)
     private BigDecimal amount;
 
-    @Column(nullable = false)
     private LocalDateTime transactionDate;
 
     private TransactionType type;
 
-    @Column(length = 100)
     private String description;
 
-    @Column
     private String referenceNumber;
 }

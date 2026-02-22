@@ -22,6 +22,10 @@ public abstract class Account {
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
+    // ADD THIS FIELD: Expose the discriminator column for querying
+    @Column(name = "account_type", insertable = false, updatable = false)
+    private String accountType;
+
     private BigDecimal balance = BigDecimal.ZERO;
 
     @Column(nullable = false)
